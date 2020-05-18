@@ -1,20 +1,3 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<title></title>
-</head>
-<body align="center">
-<input type="text" id="google" name="google" placeholder="google검색">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<font size="40">DV Connect.com</font>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<button>로그인</button>&nbsp;&nbsp;<button>회원가입</button><br><br>
-<hr>
-</body>
-</html> --%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
@@ -29,20 +12,21 @@ body {
 
 /* Style the header */
 header {
-	background-color: #666;
-	padding: 30px;
+	background-color: #FFDF24;
+	padding: 10px;
 	text-align: center;
 	font-size: 35px;
-	color: white;
+	color: black;
 }
 
 /* Create two columns/boxes that floats next to each other */
 nav {
 	float: left;
-	width: 30%;
-	height: 300px; /* only for demonstration, should be removed */
-	background: #ccc;
+	width: 20%;
+	height: 70%; /* only for demonstration, should be removed */
+	background: #8FBD24;
 	padding: 20px;
+	text-align:center;
 }
 
 /* Style the list inside the menu */
@@ -86,25 +70,42 @@ footer {
 function memberInsert(){
 	location.href="MemberInsert.do";
 }
+function login(){
+	location.href="Login.do"
+}
+function googleSearch(){
+	location.href="https://www.google.com/search?q=${google}";
+}
+function logout(){
+	location.href="Logout.do"
+}
 </script>
 
 <body>
 	<header>
-		<h2><input type="text" id="google" name="google" placeholder="google검색">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<h2><input type="text" id="google" name="google" placeholder="google검색"> 
+		<button type="button" onclick="googleSearch()">검색</button>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <font size="40">DV Connect.com</font>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<button>로그인</button>&nbsp;&nbsp;
+<c:if test="${loginId == null}">
+<button type="button" onclick="login()">로그인</button>&nbsp;&nbsp;
 <button type="button" onclick="memberInsert()">회원가입</button><br><br></h2>
+</c:if>
+<c:if test="${loginId != null }">
+<button type="button" onclick="memberUpdate()">정보수정</button>
+<button type="button" onclick="logout()">로그아웃</button>
+</c:if>
+
 	</header>
 
 	<section>
 		<nav>
 			<ul>
-				<li><a href="./">메인</a></li>				
-				<li><a href="">Q&A</a></li>
-				<li><a href="">커뮤니티</a></li>				
-				<li><a href="">칼럼</a></li>
+				<li><a href="./">메인</a></li><br><br>				
+				<li><a href="">Q&A</a></li><br><br>
+				<li><a href="">커뮤니티</a></li><br><br>				
+				<li><a href="">칼럼</a></li><br><br>
 				<li><a href="">개발언어</a></li>
 			</ul>
 		</nav>
