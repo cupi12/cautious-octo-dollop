@@ -82,7 +82,7 @@ margin='10px';
 		location.href = "Login.do"
 	}
 	function googleSearch() {
-		href = "https://www.google.com/search?q="+${google.value};
+		location.href = "https://www.google.com/search?q="+google.value;
 	}
 	function logout() {
 		location.href = "Logout.do"
