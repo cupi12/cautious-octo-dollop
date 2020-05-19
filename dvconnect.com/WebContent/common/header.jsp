@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 * {
 	box-sizing: border-box;
@@ -26,7 +26,7 @@ nav {
 	height: 70%; /* only for demonstration, should be removed */
 	background: #8FBD24;
 	padding: 20px;
-	text-align:center;
+	text-align: center;
 }
 
 /* Style the list inside the menu */
@@ -58,6 +58,14 @@ footer {
 	color: white;
 }
 
+font.m_top {
+	margin: 0 140px;
+}
+div.wrap{
+width='10%';
+margin='10px';
+}
+
 /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
 @media ( max-width : 600px) {
 	nav, article {
@@ -67,47 +75,71 @@ footer {
 }
 </style>
 <script>
-function memberInsert(){
-	location.href="MemberInsert.do";
-}
-function login(){
-	location.href="Login.do"
-}
-function googleSearch(){
-	location.href="https://www.google.com/search?q=${google}";
-}
-function logout(){
-	location.href="Logout.do"
-}
+	function memberInsert() {
+		location.href = "MemberInsert.do";
+	}
+	function login() {
+		location.href = "Login.do"
+	}
+	function googleSearch() {
+		href = "https://www.google.com/search?q="+${google.value};
+	}
+	function logout() {
+		location.href = "Logout.do"
+	}
+	function memberUpdate() {
+		location.href = "MemberUpdate.do"
+	}
 </script>
 
 <body>
 	<header>
-		<h2><input type="text" id="google" name="google" placeholder="google검색"> 
-		<button type="button" onclick="googleSearch()">검색</button>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<font size="40">DV Connect.com</font>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<c:if test="${loginId == null}">
-<button type="button" onclick="login()">로그인</button>&nbsp;&nbsp;
-<button type="button" onclick="memberInsert()">회원가입</button><br><br></h2>
-</c:if>
-<c:if test="${loginId != null }">
-<button type="button" onclick="memberUpdate()">정보수정</button>
-<button type="button" onclick="logout()">로그아웃</button>
-</c:if>
+			<input type="text" id="google" name="google" placeholder="google검색">
+			<button type="button" onclick="googleSearch()">검색</button>
+			
+			<font size="40" class="m_top">DV Connect.com</font>
+			<%
+				String loginId = (String) session.getAttribute("loginId");
+			%>
+			<%
+				if (loginId == null) {
+			%>
+			<button type="button" onclick="login()">로그인</button>
+			&nbsp;&nbsp;
+			<button type="button" onclick="memberInsert()">회원가입</button>
+			<br>
+			<br>
+		</h2>
+		<%
+			} else {
+		%>
+		<button type="button" onclick="memberUpdate()">정보수정</button>
+		<button type="button" onclick="logout()">로그아웃</button>
+		<%
+			}
+		%>
 
 	</header>
 
 	<section>
 		<nav>
 			<ul>
-				<li><a href="./">메인</a></li><br><br>				
-				<li><a href="">Q&A</a></li><br><br>
-				<li><a href="">커뮤니티</a></li><br><br>				
-				<li><a href="">칼럼</a></li><br><br>
+				<li><a href="./">메인</a></li>
+				<br>
+				<br>
+				<li><a href="QnaList.do">Q&A</a></li>
+				<br>
+				<br>
+				<li><a href="">커뮤니티</a></li>
+				<br>
+				<br>
+				<li><a href="">칼럼</a></li>
+				<br>
+				<br>
 				<li><a href="">개발언어</a></li>
 			</ul>
 		</nav>
+<div class="wrap">
 
-		
+
+</div>
