@@ -7,16 +7,20 @@
 <script>
 function validCheck(){
 	if(frm.id.value ==""){
-		alert("아이디를 입력하세요.")
+		alert("아이디를 입력하세요.");
+		frm.id.focus();
 		return;
 	}if(frm.pwd.value ==""){
-		alert("패스워드를 입력하세요.")
+		alert("패스워드를 입력하세요.");
+		frm.pwd.focus();
 		return;
 	}if(frm.email.value ==""){
-		alert("이메일을 입력하세요.")
+		alert("이메일을 입력하세요.");
+		frm.email.focus();
 		return;
 	}if(frm.nickName.value ==""){
-		alert("닉네임을 입력하세요.")
+		alert("닉네임을 입력하세요.");
+		frm.nickName.focus();
 		return;
 	}
 	frm.submit();

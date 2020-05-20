@@ -23,7 +23,7 @@ function validCheck(){
 <body>
 <h2>Q&A 게시글 등록</h2>
 <form name ="frm" action="QnaInsert.do" method="post">
-<button type="button" onclick="validCheck()">작성완료</button>
+<button onclick="validCheck()">작성완료</button>
 <button type="button" onclick="back()">이전</button><br>
 <textarea cols="60%"  id="title" name="title" placeholder="제목"></textarea><br>
 <textarea rows="30%" cols="60%" id="contents" name="contents" placeholder="내용"></textarea>

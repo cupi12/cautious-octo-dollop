@@ -17,9 +17,12 @@
 </head>
 <%@include file="/common/header.jsp"%>
 <body ailgn="center">
+<div class="wrap">
+	<div class="list_w">
 
 	<h2>Q&A 게시판</h2>
 	<button onclick="qnaInsert()">글등록</button>
+	<form name="frm">
 	<table border="1">
 		<tr>
 			<td>번호</td>
@@ -38,6 +41,15 @@
 		</c:forEach>
 		</tr>
 	</table>
+	</form>
+	<script type="text/javascript">
+	function gopage(p){
+		document.frm.p.value=p;
+		document.frm.submit();
+	}
+	</script>
 <my:paging paging="${paging }" jsfunc="gopage"/>
+</div>
+</div>
 </body>
 </html>

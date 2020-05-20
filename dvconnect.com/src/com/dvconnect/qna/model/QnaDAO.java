@@ -19,16 +19,16 @@ public class QnaDAO {
 	public int getCount(String title, String contents) {
 		String strWhere = " where 1 = 1";
 		if (title != null && !title.isEmpty()) {
-			strWhere += " and department_id = ?";
+			strWhere += " and title = ?";
 		}
 		if (contents != null && !contents.isEmpty()) {
-			strWhere += " and first_name like '%' || ? || '%'";
+			strWhere += " and contents like '%' || ? || '%'";
 		}
 		int cnt = 0;
 
 		try {
 			Connection conn = ConnectionManager.getConnnect();
-			String sql = "select count(*) AS cnt from hr.employees" + strWhere ;
+			String sql = "select count(*) AS cnt from qna" + strWhere ;
 			PreparedStatement psmt = conn.prepareStatement(sql);
 			int position = 1;
 			if (title != null && !title.isEmpty()) {
@@ -133,15 +133,27 @@ public class QnaDAO {
 		return vo;
 	}//end of getQna
 	
-	public ArrayList<QnaVO> getQnaList() {
+	public ArrayList<QnaVO> getQnaList(int start, int end, String title, String contents) {
 		ArrayList<QnaVO> list = new ArrayList<QnaVO>();
-		
+		String strWhere = " where 1 = 1";
 		Connection conn = null;
 		conn = ConnectionManager.getConnnect();
 		try {
 			PreparedStatement psmt = null;
-			String sql = "select * from qna order by seq desc";
+//			select * from qna order by seq desc
+			String sql = 
+			"SELECT B.* FROM ( SELECT A.*, ROWNUM rn FROM ( " + " select * from qna order by seq desc " 
+			+ " ) A ) B WHERE rn BETWEEN ? AND ?";
 			psmt = conn.prepareStatement(sql);
+			if (title != null && !title.isEmpty()) {
+				strWhere += " and title = ?";
+			}
+			if (contents != null && !contents.isEmpty()) {
+				strWhere += " and contents like '%' || ? || '%'";
+			}
+		       pstmt.setInt(position++, start);
+		         pstmt.setInt(position++, end);
+		         
 			ResultSet rs = psmt.executeQuery();
 			while(rs.next()) {
 				QnaVO vo = new QnaVO();

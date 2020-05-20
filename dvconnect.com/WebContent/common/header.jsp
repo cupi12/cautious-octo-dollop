@@ -22,8 +22,8 @@ header {
 /* Create two columns/boxes that floats next to each other */
 nav {
 	float: left;
-	width: 20%;
-	height: 70%; /* only for demonstration, should be removed */
+	width: 25%;
+	height: 700px; /* only for demonstration, should be removed */
 	background: #8FBD24;
 	padding: 20px;
 	text-align: center;
@@ -62,8 +62,13 @@ font.m_top {
 	margin: 0 140px;
 }
 div.wrap{
-width='10%';
-margin='10px';
+width: 75%;
+margin: 0 auto;
+float: left;
+}
+div.wrap .list_w{
+    width: fit-content;
+    margin-left: 47px;
 }
 
 /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
@@ -90,6 +95,7 @@ margin='10px';
 	function memberUpdate() {
 		location.href = "MemberUpdate.do"
 	}
+	
 </script>
 
 <body>
@@ -113,6 +119,7 @@ margin='10px';
 		<%
 			} else {
 		%>
+		<button type="button" onclick="location.href='Calendar.do'">일정관리</button>
 		<button type="button" onclick="memberUpdate()">정보수정</button>
 		<button type="button" onclick="logout()">로그아웃</button>
 		<%
@@ -133,13 +140,10 @@ margin='10px';
 				<li><a href="">커뮤니티</a></li>
 				<br>
 				<br>
-				<li><a href="">칼럼</a></li>
+				<li><a href="https://okky.kr/articles/columns">칼럼</a></li>
 				<br>
 				<br>
 				<li><a href="">개발언어</a></li>
 			</ul>
 		</nav>
-<div class="wrap">
 
-
-</div>

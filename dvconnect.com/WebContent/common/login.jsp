@@ -14,7 +14,7 @@ function back(){
 <form action ="Login.do" method="post">
 <h2>로그인</h2>
 <input type="text" id="id" name="id"><br>
-<input type="text" id="pwd" name="pwd"> <br>
+<input type="password" id="pwd" name="pwd"> <br>
 <button>로그인</button><br>
 <button onclick="back()">메인화면</button>
 </form>
