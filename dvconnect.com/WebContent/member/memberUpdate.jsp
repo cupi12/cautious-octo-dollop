@@ -14,6 +14,9 @@ function update() {
 </head>
 <body>
 <%@include file="/common/header.jsp"%>
+<div class="wrap">
+	
+<div class="list_w">
 <form name ="frm" action ="MemberUpdate.do" method="post">
 <h2>회원정보 수정</h2>
 아이디 : <input type="text" name="id" id="id" value="${vo.getId()}" readonly><br>
@@ -22,6 +25,7 @@ function update() {
 닉네임 : <input type="text" name="nickName" id="nickName" value="${vo.getNickName()}" placeholder="닉네임"><br>
 <button type="button" onclick="update()">수정</button>
 </form>
+</div></div>
 
 </body>
 </html>

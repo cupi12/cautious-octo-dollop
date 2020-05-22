@@ -22,6 +22,7 @@ public class QnaContents extends HttpServlet {
 		String seq = request.getParameter("seq");
 		int seq1 = Integer.parseInt(seq);
 		
+		QnaVO vo = new QnaVO();
 		QnaDAO dao = new QnaDAO();
 				
 		request.setAttribute("vo", dao.getQna(seq1));

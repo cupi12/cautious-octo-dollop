@@ -112,6 +112,8 @@
 }
 </style>
 <%@include file="/common/header.jsp"%>
+<div class="wrap">
+	<div class="list_w">
 <br><br>
 	<table border='0' width='521' celpadding='0' cellspacing='0'>
 		<tr>
@@ -199,4 +201,6 @@
 		</tr>
 	</table>
 	<button onclick="location.href='CalendarInsert.do'">일정등록</button>
+	</div>
+	</div>
 </html>

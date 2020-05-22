@@ -16,6 +16,41 @@ public class QnaDAO {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
+	public ArrayList<QnaVO> getMainQnaList() {
+		ArrayList<QnaVO> list = new ArrayList<QnaVO>();
+	
+		
+		Connection conn = null;
+		conn = ConnectionManager.getConnnect();
+		try {
+			int position = 1;
+			PreparedStatement psmt = null;
+//			select * from qna order by seq desc
+			String sql ="select * FROM qna order by seq desc";
+
+			psmt = conn.prepareStatement(sql);			
+		         
+			ResultSet rs = psmt.executeQuery();
+			while(rs.next()) {
+				QnaVO vo = new QnaVO();
+				vo.setContents(rs.getString("contents"));
+				vo.setRegdt(rs.getString("regdt"));
+				vo.setSeq(rs.getInt("seq"));
+				vo.setTitle(rs.getString("title"));
+				vo.setNickName(rs.getString("nickName"));				
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			ConnectionManager.close(conn);
+		}
+		
+		return list;
+	}//end of getQnaList
+	
+	
 	public int getCount(String title, String contents) {
 		String strWhere = " where 1 = 1";
 		if (title != null && !title.isEmpty()) {
@@ -26,8 +61,8 @@ public class QnaDAO {
 		}
 		int cnt = 0;
 
+		Connection conn = ConnectionManager.getConnnect();
 		try {
-			Connection conn = ConnectionManager.getConnnect();
 			String sql = "select count(*) AS cnt from qna" + strWhere ;
 			PreparedStatement psmt = conn.prepareStatement(sql);
 			int position = 1;
@@ -87,7 +122,7 @@ public class QnaDAO {
 		Connection conn = null;
 		PreparedStatement psmt = null;
 
-		String sql = "insert into QNA (seq, title, contents, nickname, regdt) values ((select nvl(max(seq),0)+1 from qna), ?, ?, ?, sysdate)";
+		String sql = "insert into QNA (seq, title, contents, nickname,id, regdt) values ((select nvl(max(seq),0)+1 from qna), ?, ?, ?, ?, sysdate )";
 
 		conn = ConnectionManager.getConnnect();
 		try {
@@ -97,6 +132,7 @@ public class QnaDAO {
 			psmt.setString(1, vo.getTitle());
 			psmt.setString(2, vo.getContents());
 			psmt.setString(3, vo.getNickName());
+			psmt.setString(4, vo.getId());
 			psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -133,26 +169,36 @@ public class QnaDAO {
 		return vo;
 	}//end of getQna
 	
-	public ArrayList<QnaVO> getQnaList(int start, int end, String title, String contents) {
+	public ArrayList<QnaVO> getQnaList(int start, int end, String seq, String contents) {
 		ArrayList<QnaVO> list = new ArrayList<QnaVO>();
 		String strWhere = " where 1 = 1";
+		if (seq != null && !seq.isEmpty()) {
+			strWhere += " and seq = ?";
+		}
+		if (contents != null && !contents.isEmpty()) {
+			strWhere += " and contents like '%' || ? || '%'";
+		}
 		Connection conn = null;
 		conn = ConnectionManager.getConnnect();
 		try {
+			int position = 1;
 			PreparedStatement psmt = null;
 //			select * from qna order by seq desc
-			String sql = 
-			"SELECT B.* FROM ( SELECT A.*, ROWNUM rn FROM ( " + " select * from qna order by seq desc " 
-			+ " ) A ) B WHERE rn BETWEEN ? AND ?";
+			String sql = "select B.* from (select A.*, rownum rn from ("
+					+ "select * FROM qna"+  strWhere+ "order by seq desc"
+							+ "  ) A  )B where rn between ? and ?  ";
+//			String sql = 
+//			"SELECT B.* FROM ( SELECT A.*, ROWNUM rn FROM ( " + " select * from qna order by seq desc " 
+//			+ " ) A ) B WHERE rn BETWEEN ? AND ?";
 			psmt = conn.prepareStatement(sql);
-			if (title != null && !title.isEmpty()) {
-				strWhere += " and title = ?";
+			if (seq != null && !seq.isEmpty()) {
+				strWhere += " and seq = ?";
 			}
 			if (contents != null && !contents.isEmpty()) {
 				strWhere += " and contents like '%' || ? || '%'";
 			}
-		       pstmt.setInt(position++, start);
-		         pstmt.setInt(position++, end);
+		       psmt.setInt(position++, start);
+		         psmt.setInt(position, end);
 		         
 			ResultSet rs = psmt.executeQuery();
 			while(rs.next()) {

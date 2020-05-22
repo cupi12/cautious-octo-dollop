@@ -47,7 +47,7 @@ public class Login extends HttpServlet {
 			session.setAttribute("loginId", id);
 			session.setAttribute("nickName", vo.getNickName());
 			session.setAttribute("loginMember", vo);
-			request.getRequestDispatcher("common/header.jsp").forward(request, response);
+			request.getRequestDispatcher("/").forward(request, response);
 			out.print("로그인 성공");
 		}
 //		doGet(request, response);

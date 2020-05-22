@@ -5,6 +5,8 @@
 <head>
 <title></title>
 <%@include file="/common/header.jsp"%>
+<div class="wrap">
+	<div class="list_w">
 <body align="center">
 <br><br>
 <h2>일정 추가</h2>
@@ -13,5 +15,6 @@
 일정 : <input type="text" id="schedule" name="schedule"><br>
 <button onclick="location.href='Calendar.do'">추가</button>
 </form>
+</div></div>
 </body>
 </html>

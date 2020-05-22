@@ -61,14 +61,16 @@ footer {
 font.m_top {
 	margin: 0 140px;
 }
-div.wrap{
-width: 75%;
-margin: 0 auto;
-float: left;
+
+div.wrap {
+	width: 75%;
+	margin: 0 auto;
+	float: left;
 }
-div.wrap .list_w{
-    width: fit-content;
-    margin-left: 47px;
+
+div.wrap .list_w {
+	width: fit-content;
+	margin-left: 47px;
 }
 
 /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
@@ -87,34 +89,36 @@ div.wrap .list_w{
 		location.href = "Login.do"
 	}
 	function googleSearch() {
-		location.href = "https://www.google.com/search?q="+google.value;
+		window.open('about:blank').location.href = "https://www.google.com/search?q="
+				+ google.value;
 	}
 	function logout() {
-		location.href = "Logout.do"
+		var result = confirm("정말 로그아웃 하시겠습니까?");
+		if (result) {
+			location.href = "Logout.do"
+		}
 	}
 	function memberUpdate() {
 		location.href = "MemberUpdate.do"
 	}
-	
 </script>
 
 <body>
 	<header>
-			<input type="text" id="google" name="google" placeholder="google검색">
-			<button type="button" onclick="googleSearch()">검색</button>
-			
-			<font size="40" class="m_top">DV Connect.com</font>
-			<%
-				String loginId = (String) session.getAttribute("loginId");
-			%>
-			<%
-				if (loginId == null) {
-			%>
-			<button type="button" onclick="login()">로그인</button>
-			&nbsp;&nbsp;
-			<button type="button" onclick="memberInsert()">회원가입</button>
-			<br>
-			<br>
+		<input type="text" id="google" name="google" placeholder="google검색">
+		<button type="button" onclick="googleSearch()">검색</button>
+
+		<font size="40" class="m_top">DV Connect.com</font>
+		<%
+			String loginId = (String) session.getAttribute("loginId");
+		%>
+		<%
+			if (loginId == null) {
+		%>
+		<button type="button" onclick="login()">로그인</button>
+		&nbsp;&nbsp;
+		<button type="button" onclick="memberInsert()">회원가입</button>
+		<br> <br>
 		</h2>
 		<%
 			} else {
@@ -137,13 +141,12 @@ div.wrap .list_w{
 				<li><a href="QnaList.do">Q&A</a></li>
 				<br>
 				<br>
-				<li><a href="">커뮤니티</a></li>
+				<li><a href="CommunityList.do">커뮤니티</a></li>
 				<br>
 				<br>
-				<li><a href="https://okky.kr/articles/columns">칼럼</a></li>
+				<li><a href="https://okky.kr/articles/columns" target="_blank">칼럼</a></li>
 				<br>
 				<br>
-				<li><a href="">개발언어</a></li>
+				<li><a href="Language.do">개발언어</a></li>
 			</ul>
 		</nav>
-

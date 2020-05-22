@@ -21,22 +21,29 @@ public class QnaList extends HttpServlet {
 			throws ServletException, IOException {
 		String title = request.getParameter("title");
 		String contents = request.getParameter("contents");
-		QnaDAO dao = new QnaDAO();
-		List<QnaVO> qnaList = dao.getQnaList();
 		
-		String strPage =request.getParameter("p");
-		int p =1;
+		String strPage = request.getParameter("p");
+		int p =1;		
+		
+		
+		QnaDAO dao = new QnaDAO();
+		
 		if(strPage != null && !strPage.isEmpty()) {
-			p = Integer.parseInt(strPage);
+			p=Integer.parseInt(strPage);
 		}
-		//페이징 객체를 생성
+		
 		Paging paging = new Paging();
-		paging.setPageUnit(5); //한페이지에 출력할 레코드 건수
-		paging.setPageSize(5); //한페이지에 출력할 페이지 번호 수
+		paging.setPageUnit(10); //한페이지에 출력할 레코드 건수
+		paging.setPageSize(10); //한페이지에 출력할 페이지 번호 수
 		paging.setPage(p); //현재 페이지
 		paging.setTotalRecord(dao.getCount(title, contents)); //전체 레코드 건수 (조회 필수)!!!
 		
 		request.setAttribute("paging", paging);
+		//목록 조회
+		int start = paging.getFirst();
+		int end = paging.getLast();
+		
+		List<QnaVO> qnaList = dao.getQnaList(start, end, title, contents);	
 		
 		request.setAttribute("qnaList", qnaList);
 		request.getRequestDispatcher("/qna/qnaList.jsp").forward(request, response);
@@ -44,7 +51,8 @@ public class QnaList extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
+		
+		response.sendRedirect("QnaList.do");
 	}
 
 }

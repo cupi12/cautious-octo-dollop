@@ -1,4 +1,4 @@
-<%@page import="com.dvconnect.qna.model.QnaVO"%>
+<%@page import="com.dvconnect.community.model.CommunityVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -10,8 +10,8 @@
 <head>
 <title>게시글보기</title>
 <script>
-	function qnaInsert() {
-		location.href = "QnaInsert.do"
+	function communityInsert() {
+		location.href = "CommunityInsert.do"
 	}
 </script>
 </head>
@@ -20,9 +20,9 @@
 <div class="wrap">
 	<div class="list_w">
 
-	<h2>Q&A 게시판</h2>
+	<h2>Community 게시판</h2>
 	<c:if test="${loginId != null }">
-	<button onclick="qnaInsert()">글등록</button>
+	<button onclick="communityInsert()">글등록</button>
 	</c:if>
 	<form name="frm">
 	<input name="p" value="1" type="hidden">
@@ -33,10 +33,10 @@
 			<td>작성자</td>
 			<td>작성일자</td>
 		</tr>
-		<c:forEach items="${qnaList }" var="vo">
+		<c:forEach items="${communityList }" var="vo">
 			<tr>
 				<td>${vo.seq }</td>
-				<td><a href="QnaContents.do?seq=${vo.seq }">${vo.title }</a></td>
+				<td><a href="CommunityContents.do?seq=${vo.seq }">${vo.title }</a></td>
 				<td>${vo.nickName }</td>
 				<td><fmt:parseDate value="${vo.regdt }" var="fmtDt"
 						pattern="yyyy-MM-dd" /> <fmt:formatDate value="${fmtDt}"

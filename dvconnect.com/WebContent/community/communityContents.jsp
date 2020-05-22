@@ -7,14 +7,10 @@
 <title>하준원</title>
 <script>
 function back(){
-	location.href="QnaList.do";
+	location.href="/CommunityList.do";
 }
 function del(){
-	result=confirm("정말 삭제하시겠습니까?");
-	if(result){
-	location.href="QnaDelete.do?seq="+${vo.seq };	
-	}
-	
+	location.href="CommunityDelete.do?seq="+${vo.seq };
 	alert("삭제완료");
 }
 </script>
@@ -26,7 +22,7 @@ function del(){
 <div class="list_w">
 <h2>게시글 조회</h2>
 <c:if test="${vo.getId() == loginId or loginId=='admin' }">
-<button onclick="location.href='QnaUpdate.do?seq=${vo.seq }'">수정</button>
+<button onclick="location.href='CommunityUpdate.do?seq=${vo.seq }'">수정</button>
 <button onclick="del()">삭제</button>
 </c:if>
 <button onclick="back()">목록</button><br>

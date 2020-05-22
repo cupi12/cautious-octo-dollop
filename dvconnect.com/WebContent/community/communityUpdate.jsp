@@ -8,7 +8,7 @@
 </head>
 <script>
 function back(){
-	location.href = "QnaList.do";
+	location.href = "CommunityList.do";
 }
 
 </script>
@@ -16,7 +16,7 @@ function back(){
 <%@include file="/common/header.jsp"%>
 <div class="wrap">
 	<div class="list_w">
-<form action="QnaUpdate.do" method="post">
+<form action="CommunityUpdate.do" method="post">
 <h2>게시글 수정</h2>
 <input type="hidden" name="seq" value="${vo.seq }">
 <textarea rows="auto" cols="60%" name="title" id="title">${vo.title }</textarea><br>
